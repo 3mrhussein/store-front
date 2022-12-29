@@ -8,7 +8,7 @@ export type Weapon = {
 };
 
 export class MythicalWeaponStore {
-  tableName = 'mythical_weapons';
+  readonly tableName = 'mythical_weapons';
 
   async index(): Promise<Weapon[]> {
     try {

@@ -13,6 +13,7 @@ const mythicalWeaponsData: Weapon[] = [
 export function fillDummy() {
   const mythicalWeaponTable = new MythicalWeaponStore();
   mythicalWeaponsData.map(
-    async (row) => await mythicalWeaponTable.insert(row.name, row.type, row.weight)
+    async (row) =>
+      await mythicalWeaponTable.insert(row.name, row.type, row.weight)
   );
 }
