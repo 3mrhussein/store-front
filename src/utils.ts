@@ -1,7 +1,7 @@
 import config from './config';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { USER } from './models/users';
+import { USER } from './models/user.model';
 const { PEPPER, TOKEN_SECRET } = config;
 
 export const hash = (password: string): string => {
@@ -17,17 +17,6 @@ export const verifyPassword = (password: string, hashedPassword: string): boolea
 
 export const createToken = (payload: USER): string => {
   return jwt.sign(payload, TOKEN_SECRET as string, { expiresIn: 1000 * 60 * 60 * 24 });
-};
-
-export const verifyToken = (token: string) => {
-  jwt.verify(token, TOKEN_SECRET as string, function (err, decoded) {
-    if (err) {
-      return false;
-    }
-    if (decoded) {
-      return decoded;
-    }
-  });
 };
 
 export const maxPassword = () => {

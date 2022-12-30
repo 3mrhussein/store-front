@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { maxPassword } from '../../utils';
 
-const validateUser_MW = (req: Request, res: Response, next: NextFunction) => {
+const validateUserParams_MW = (req: Request, res: Response, next: NextFunction) => {
   let errMessage = '';
-
   if (!req.body.firstName) {
     //if firstName is missing
     errMessage += 'firstName is Required,\n ';
@@ -35,4 +34,4 @@ const validateUser_MW = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default validateUser_MW;
+export default validateUserParams_MW;
