@@ -1,6 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import Products, { PRODUCT } from '../models/products.model';
 import path from 'path';
+
+// -----------------------
+// -----------------
+// ----------
+// ----------------------- Get ALL Products
+// ----------
+// -----------------
+// -----------------------
 export const products_GET = async (
   req: Request,
   res: Response,
@@ -15,7 +23,19 @@ export const products_GET = async (
   }
 };
 
-export const products_POST = async (
+// -----------------------
+// -----------------
+// ----------
+// ----------------------- CREATE NEW PRODUCT
+// ----------
+// -----------------
+// -----------------------
+
+export const product_create_GET = (req: Request, res: Response): void => {
+  res.sendFile(path.resolve('public', 'createProduct.html'));
+};
+
+export const product_create_POST = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -35,6 +55,14 @@ export const products_POST = async (
   }
 };
 
+// -----------------------
+// -----------------
+// ----------
+// ----------------------- GET PRODUCT BY ID
+// ----------
+// -----------------
+// -----------------------
+
 export const product_id_GET = async (
   req: Request,
   res: Response,
@@ -50,6 +78,14 @@ export const product_id_GET = async (
   }
 };
 
-export const ProductPage_GET = (req: Request, res: Response): void => {
+// -----------------------
+// -----------------
+// ----------
+// ----------------------- SEARCH PRODUCT FORM
+// ----------
+// -----------------
+// -----------------------
+
+export const product_search_GET = (req: Request, res: Response): void => {
   res.sendFile(path.resolve('public', 'getProduct.html'));
 };

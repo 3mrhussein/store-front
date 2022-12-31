@@ -15,7 +15,7 @@ export default class Users {
   async index(): Promise<USER[]> {
     try {
       const conn = await client.connect();
-      const sql = `SELECT * FROM ${this.tableName};`;
+      const sql = `SELECT id,firstName,lastName FROM ${this.tableName};`;
       const result = await conn.query(sql);
       await conn.release();
       return result.rows;

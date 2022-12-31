@@ -1,19 +1,21 @@
 import express from 'express';
 import {
-  ProductPage_GET,
+  product_search_GET,
   products_GET,
-  products_POST,
+  product_create_POST,
   product_id_GET,
-} from '../handlers/product.handler';
+  product_create_GET,
+} from '../handlers/products.handler';
 import uniqueProduct_MW from '../middlewares/productMiddlewares/uniqueProduct.middleware';
 import authUser_MW from '../middlewares/userMiddlewares/authUser.middleware';
 import uuid_MW from '../middlewares/uuid.middleware';
 
-const productRoutes = express.Router();
+const productsRoutes = express.Router();
 
-productRoutes.get('/', authUser_MW, products_GET);
-productRoutes.post('/', uniqueProduct_MW, products_POST);
-productRoutes.get('/get-by-id', ProductPage_GET);
-productRoutes.get('/:id', uuid_MW, product_id_GET);
+productsRoutes.get('/', products_GET);
+productsRoutes.post('/create', authUser_MW, uniqueProduct_MW, product_create_POST);
+productsRoutes.get('/create', authUser_MW, product_create_GET);
+productsRoutes.get('/search', product_search_GET);
+productsRoutes.get('/:id', uuid_MW, product_id_GET);
 
-export default productRoutes;
+export default productsRoutes;

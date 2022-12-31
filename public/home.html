@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
 
     <title>Store Front</title>
   </head>
@@ -13,9 +13,9 @@
       <h1></h1>
       <ul>
         <li id="welcome">Welcome,</li>
-        <li><a href="/signout">Sign Out</a></li>
-        <li><a href="/signin">Sign In</a></li>
+        <li id="login"><a href="/signin">login</a></li>
         <li><a href="/signup" class="btn">Sign up</a></li>
+        <li id="logout"><a href="/signout">logout</a></li>
       </ul>
     </nav>
 
@@ -24,8 +24,14 @@
         <h2>Store Front</h2>
         <h3>By Amr Hussein</h3>
         <a href="/users" target="_blank" class="btn">View Users</a>
+        <br />
         <a href="/products" target="_blank" class="btn">View Products</a>
-        <a href="/products/get-by-id" target="_blank" class="btn">Get Products</a>
+        <a href="/products/search" target="_blank" class="btn">Search Products</a>
+        <a href="/products/create" target="_blank" class="btn">New Product</a>
+        <br />
+        <a href="/orders" target="_blank" class="btn">View Orders</a>
+        <a href="/orders/create" target="_blank" class="btn">New Order</a>
+        <a href="/orders/addItem" target="_blank" class="btn">Fill Order</a>
       </div>
     </header>
 
@@ -39,8 +45,18 @@
             method: 'GET',
           });
           const data = await res.json();
-          welcome.textContent = 'welcome ' + data.firstname;
-        } catch (err) {}
+          // welcome.textContent = 'welcome ' + data.firstname;
+          const login = document.getElementById('login');
+          login.remove();
+          const tag = document.createElement('strong');
+          tag.className = 'username';
+          const name = document.createTextNode(data.firstname + ' ' + data.lastname);
+          tag.appendChild(name);
+          welcome.appendChild(tag);
+        } catch (err) {
+          const logout = document.getElementById('logout');
+          logout.remove();
+        }
       });
     </script>
   </body>

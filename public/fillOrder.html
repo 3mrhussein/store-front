@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Order</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <form method="post" action="">
+      <label for="order_id">Owner, OrderStatus, OrderID:</label><br />
+      <select name="order_id" id="order_id"></select>
+      <label for="product_id">Product:</label><br />
+      <select name="product_id" id="product_id"></select>
+      <label for="qty">Quantity:</label><br />
+      <input type="number" name="qty" />
+      <input class="btn" type="submit" value="Create" />
+    </form>
+
+    <script>
+      const orderList = document.querySelector('#order_id');
+      const productList = document.querySelector('#product_id');
+      window.addEventListener('load', async () => {
+        // reset errors
+        // get values
+        //Fetch Orders
+
+        try {
+          const res = await fetch('/products', {
+            method: 'GET',
+          });
+          const data = await res.json();
+          if (data) {
+            data.forEach((product, i) => {
+              let productOption = document.createElement('option');
+              productOption.innerHTML = product.name;
+              productOption.value = product.id;
+              productList.appendChild(productOption);
+            });
+          }
+        } catch (err) {
+          console.log(err);
+        }
+
+        //Fetch Products
+        try {
+          const res = await fetch('/orders', {
+            method: 'GET',
+          });
+          const data = await res.json();
+          if (data) {
+            data.forEach(async (order, i) => {
+              try {
+                console.log(order);
+                const userResponse = await fetch('/users/' + order.userID, {
+                  method: 'GET',
+                });
+                const userData = await userResponse.json();
+                let orderOption = document.createElement('option');
+                orderOption.innerHTML =
+                  userData.firstname +
+                  ' ' +
+                  userData.lastname +
+                  ', ' +
+                  order.status +
+                  ', ' +
+                  order.userID;
+                orderOption.value = order.orderID;
+                orderList.appendChild(orderOption);
+              } catch (e) {
+                window.console.log(e);
+              }
+            });
+          }
+        } catch (err) {}
+      });
+    </script>
+  </body>
+</html>

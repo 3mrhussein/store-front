@@ -1,11 +1,21 @@
 /* google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+form br {
+  display: none;
+}
 body {
   margin: 20px 40px;
   font-size: 1.2rem;
   letter-spacing: 1px;
   background: #fccccc;
+  min-height: 90vh;
 }
 h1,
 h2,
@@ -18,8 +28,7 @@ p,
 input,
 label,
 button,
-div,
-footer {
+div {
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
@@ -54,7 +63,6 @@ nav li a {
   letter-spacing: 2px;
 }
 .btn {
-  margin-top: 10px;
   border-radius: 36px;
   background: #fee996;
 }
@@ -71,16 +79,18 @@ form {
   border-radius: 10px;
   background: white;
 }
-input {
+input,
+select,
+option {
   padding: 10px 12px;
   border-radius: 4px;
   border: 1px solid #ddd;
   font-size: 1em;
   width: 100%;
+  margin: 10px 0 20px;
 }
 label {
   display: block;
-  margin: 20px 0 10px;
 }
 button {
   margin-top: 30px;
@@ -94,12 +104,7 @@ button {
   padding: 10px 16px;
   letter-spacing: 2px;
 }
-.error {
-  color: #ff0099;
-  margin: 10px 2px;
-  font-size: 0.8em;
-  font-weight: bold;
-}
+
 header {
   display: flex;
   align-items: center;
@@ -125,4 +130,8 @@ header .btn {
   font-weight: bold;
   display: inline-block;
   font-size: 0.8em;
+}
+.username {
+  font-size: 1.5rem;
+  color: #3355be;
 }
