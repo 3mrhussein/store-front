@@ -1,23 +1,28 @@
 import { authUser_MW } from '../middlewares/userMiddlewares/USER.MW';
-import express, { Request, Response } from 'express';
+import express from 'express';
 import uuid_MW from '../middlewares/uuid.middleware';
 import {
-  completed_order_GET,
+  completed_orders_GET,
+  completed_orders_page_GET,
   current_order_GET,
+  current_order_page_GET,
   orders_addItem_GET,
   orders_addItem_POST,
   orders_create_GET,
   orders_create_POST,
   orders_GET,
-} from '../handlers/orders.handler';
+} from '../handlers/orders.handlers';
 
 const ordersRoutes = express.Router();
+
 ordersRoutes.get('/', orders_GET);
 ordersRoutes.get('/create', orders_create_GET);
 ordersRoutes.post('/create', orders_create_POST);
 ordersRoutes.get('/addItem', orders_addItem_GET);
 ordersRoutes.post('/addItem', orders_addItem_POST);
-ordersRoutes.get('/current/:id', uuid_MW, current_order_GET);
-ordersRoutes.get('/completed/:id', uuid_MW, completed_order_GET);
+ordersRoutes.get('/current', authUser_MW, current_order_page_GET);
+ordersRoutes.get('/current/:id', authUser_MW, uuid_MW, current_order_GET);
+ordersRoutes.get('/completed/', authUser_MW, completed_orders_page_GET);
+ordersRoutes.get('/completed/:id', authUser_MW, uuid_MW, completed_orders_GET);
 
 export default ordersRoutes;

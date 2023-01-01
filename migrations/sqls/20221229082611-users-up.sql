@@ -6,3 +6,4 @@ CREATE TABLE users (
   password CHAR(60) NOT NULL,
   PRIMARY KEY (id)
   );
+

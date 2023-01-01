@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import Users, { USER } from '../../models/user.model';
+import { USER } from '../../interfaces/interfaces';
+import Users from '../../models/user.model';
 
 const uniqueUser_MW = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   //check if user is unique base on firstName & lastName maybe handeled to check for only email later

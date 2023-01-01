@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Product By ID</title>
+    <title>Get Product By Category</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <form method="get" action="/product">
-      <h2>Product By ID</h2>
-      <label for="id">Product ID:</label><br />
-      <input type="text" id="id" name="id" /><br />
+      <h2>Product By Category</h2>
+      <label for="category">Product Category:</label><br />
+      <input type="text" id="category" name="category" /><br />
       <input class="btn" type="submit" value="GET" />
     </form>
 
@@ -16,8 +16,8 @@
       const form = document.querySelector('form');
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const id = form.id.value;
-        form.action = '/products/' + id;
+        const category = form.category.value;
+        form.action = '/products/category/' + category;
         form.submit();
       });
     </script>

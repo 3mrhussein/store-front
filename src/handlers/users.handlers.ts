@@ -1,15 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import { createToken, hash, verifyPassword } from '../utils';
-import Users, { USER } from '../models/user.model';
+import Users from '../models/user.model';
 import path from 'path';
 import jwt from 'jsonwebtoken';
-// -----------------------
-// -----------------
-// ----------
-// ----------------- ----- GET USERS
-// ----------
-// -----------------
-// -----------------------
+import { USER } from '../interfaces/interfaces';
+
+//-----------------------------------------------------------------------
+//-------------------- ALL Users ------------------------
+//-----------------------------------------------------------------------
 
 export const users_GET = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const user = new Users();
@@ -20,6 +18,18 @@ export const users_GET = async (req: Request, res: Response, next: NextFunction)
     next(err);
   }
 };
+
+//-----------------------------------------------------------------------
+//-------------------- Search user Page ------------------------
+//-----------------------------------------------------------------------
+
+export const users_search_page_GET = async (req: Request, res: Response): Promise<void> => {
+  res.sendFile(path.resolve('public', 'searchUsers.html'));
+};
+
+//-----------------------------------------------------------------------
+//-------------------- User By ID ------------------------
+//-----------------------------------------------------------------------
 
 export const user_id_GET = async (
   req: Request,
@@ -36,13 +46,9 @@ export const user_id_GET = async (
   }
 };
 
-// -----------------------
-// -----------------
-// ----------
-// ----------------------- SIGN IN
-// ----------
-// -----------------
-// -----------------------
+//-----------------------------------------------------------------------
+//-------------------- SIGN IN ------------------------
+//-----------------------------------------------------------------------
 
 export const signin_GET = async (req: Request, res: Response): Promise<void> => {
   res.sendFile(path.resolve('public', 'signin.html'));
@@ -73,13 +79,9 @@ export const signin_POST = async (
   }
 };
 
-// -----------------------
-// -----------------
-// ----------
-// ----------------------- SIGN UP
-// ----------
-// -----------------
-// -----------------------
+//-----------------------------------------------------------------------
+//-------------------- SIGN UP ------------------------
+//-----------------------------------------------------------------------
 
 export const signup_GET = async (req: Request, res: Response): Promise<void> => {
   res.sendFile(path.resolve('public', 'signup.html'));
@@ -101,32 +103,23 @@ export const signup_POST = async (
     const result = await user.create(newUser);
     res.cookie('token', createToken(result), { maxAge: 1000 * 60 * 60 * 24 });
     res.send(result);
-    // res.redirect(req.session.returnTo || '/');
   } catch (err) {
     next(err);
   }
 };
 
-// -----------------------
-// -----------------
-// ----------
-// ----------------------- SIGN OUT
-// ----------
-// -----------------
-// -----------------------
+//-----------------------------------------------------------------------
+//-------------------- SIGN OUT ------------------------
+//-----------------------------------------------------------------------
 
 export const signout_GET = async (req: Request, res: Response): Promise<void> => {
   res.cookie('token', '', { maxAge: 1, httpOnly: true });
   res.redirect('/');
 };
 
-// -----------------------
-// -----------------
-// ----------
-// ----------------------- GET CURRENT USER
-// ----------
-// -----------------
-// -----------------------
+//-----------------------------------------------------------------------
+//-------------------- Current User ------------------------
+//-----------------------------------------------------------------------
 
 export const currentUser_GET = (req: Request, res: Response) => {
   if (req.cookies.token) {

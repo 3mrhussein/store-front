@@ -1,11 +1,5 @@
 import client from '../database';
-
-export interface USER {
-  firstName: string;
-  lastName: string;
-  password: string;
-  id?: string;
-}
+import { USER } from '../interfaces/interfaces';
 
 export default class Users {
   readonly tableName = 'users';

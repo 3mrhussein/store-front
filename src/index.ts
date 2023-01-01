@@ -4,21 +4,18 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import config from './config';
 import routes from './routes';
-import morgan from 'morgan';
 import path from 'path';
 declare module 'express-session' {
   interface SessionData {
     returnTo?: string;
   }
 }
-
-const app: Express = express();
+export const app: Express = express();
 const PORT = config.PORT || 4000;
 app.use(express.static('public'));
 app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan('tiny'));
 app.use(
   session({
     secret: config.SESSION_SECRET,

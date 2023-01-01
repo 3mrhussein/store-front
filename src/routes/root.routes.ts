@@ -5,7 +5,7 @@ import {
   signin_GET,
   signup_GET,
   signout_GET,
-} from '../handlers/users.handler';
+} from '../handlers/users.handlers';
 import {
   authUser_MW,
   uniqueUser_MW,

@@ -1,11 +1,5 @@
 import client from '../database';
-
-export interface PRODUCT {
-  name: string;
-  price: number;
-  category: string;
-  id?: string;
-}
+import { PRODUCT } from '../interfaces/interfaces';
 
 export default class Products {
   readonly tableName = 'products';
@@ -78,6 +72,28 @@ export default class Products {
       return result.rows;
     } catch (e) {
       throw new Error(`Failed to fetch products with category ${category}`);
+    }
+  }
+
+  //----------------------------------------------- TOP 5 --------------------------------------------
+
+  async topProducts(limit: number): Promise<PRODUCT[]> {
+    try {
+      const conn = await client.connect();
+      const sql = `SELECT p.id as id , p.name as name , p.price as price ,
+        p.category as category, SUM(op.qty) as total
+        FROM ${this.tableName} p 
+        INNER JOIN order_product op ON p.id = op.product_id 
+        INNER JOIN orders o ON op.order_id = o.id 
+        GROUP BY p.id
+        ORDER BY SUM(qty) DESC 
+        LIMIT ($1);`;
+
+      const result = await conn.query(sql, [limit]);
+      await conn.release();
+      return result.rows;
+    } catch (e) {
+      throw new Error(`Failed to fetch TOP 5 Products ${e}`);
     }
   }
 }

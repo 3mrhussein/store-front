@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Product By ID</title>
+    <title>Search Users</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <form method="get" action="/product">
-      <h2>Product By ID</h2>
-      <label for="id">Product ID:</label><br />
+      <h2>Search User By ID</h2>
+      <label for="id">USER ID:</label><br />
       <input type="text" id="id" name="id" /><br />
       <input class="btn" type="submit" value="GET" />
     </form>
@@ -17,7 +17,7 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const id = form.id.value;
-        form.action = '/products/' + id;
+        form.action = '/users/' + id;
         form.submit();
       });
     </script>

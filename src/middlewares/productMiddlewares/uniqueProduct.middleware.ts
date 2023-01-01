@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import Products, { PRODUCT } from '../../models/products.model';
+import { PRODUCT } from '../../interfaces/interfaces';
+import Products from '../../models/products.model';
 
 const uniqueProduct_MW = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   //check if user is unique base on firstName & lastName maybe handeled to check for only email later
