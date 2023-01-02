@@ -28,9 +28,11 @@
    
    2- cd into project directory and run `npm install`
    
-   3- run `docker-compose up` & keep this terminal running
+   3- create .env file in the project directory and copy/paste https://github.com/3amr7ussein/.env-files/blob/main/.env
    
-   4- Open new terminal and run project scripts
+   4- run `docker-compose up` & keep this terminal running
+   
+   5- Open new terminal and run project scripts
    
   - `npm run test` to run jasmine unit test on the project
       
