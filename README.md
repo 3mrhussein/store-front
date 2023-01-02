@@ -93,7 +93,7 @@
 
 </details>
 
-### Schema
+### Database Schema
 <img src="https://user-images.githubusercontent.com/34787413/210238932-bbdf2670-611a-48ef-87b8-2f4a01325e7f.png" width="700"/>
 
 ### Used Technologies
