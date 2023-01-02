@@ -29,17 +29,18 @@ const installedDeps = runCommand(installDepsCommand);
 
 if (!installedDeps) process.exit(-1);
 
-const installDockerContainer = `cd ${repoName} && docker-compose up`;
-console.log(`Initiallizing Docker Container`);
-const installedContainer = runCommand(installDockerContainer);
-
-if (!installedContainer) process.exit(-1);
-
 console.log('Congratulations! you are ready. Follow the following command to start');
-console.log(`cd ${repoName} `);
+console.log(`\n1- cd ${repoName} `);
 console.log(
-  `Last step is to create .env file in project directory,\n
-  fell free to copy/paste mine https://github.com/3amr7ussein/.env-files/blob/main/.env `
+  `2- create .env file in ${repoName} directory & copy/paste https://github.com/3amr7ussein/.env-files/blob/main/.env `
 );
-console.log(`Run 'npm start' to start project with nodemon `);
+
+console.log(
+  `3- Run 'docker-compose' to Create & Start postgres container\nNote: keep the terminal running after step #3 & open a new terminal to run Project scripts`
+);
+
+console.log(`\nProject Scripts`);
 console.log(`Run 'npm run test' run jasmine unit tests `);
+console.log(
+  `Run 'npm start' to fill database with dummy data & start project on http://localhost:4000/`
+);
