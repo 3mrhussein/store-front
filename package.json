@@ -8,9 +8,9 @@
     "prod-reset": "db-migrate --env prod reset",
     "dev-reset": "db-migrate --env dev reset",
     "test-reset": "db-migrate --env test reset",
+    "fill-data": "npm run dev-reset&& db-migrate --env dev up &&ts-node ./src/tests/testData.ts",
     "test": "npx tsc&&npm run test-reset &&set ENV=test&& db-migrate --env test up && jasmine ",
-    "start": "npx tsc && db-migrate --env dev up && nodemon ./src/index.ts",
-    "start:prod": "npx tsc && set ENV=prod&& db-migrate --env prod up && node dist/src/index.js",
+    "start": "npx tsc&&npm run fill-data&& nodemon ./src/index.ts",
     "lint": "eslint ./src --ext .ts",
     "lint:fix": "eslint ./src --ext .ts --fix"
   },

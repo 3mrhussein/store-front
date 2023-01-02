@@ -5,6 +5,7 @@ import session from 'express-session';
 import config from './config';
 import routes from './routes';
 import path from 'path';
+import { fillDataBase } from './tests/testData';
 declare module 'express-session' {
   interface SessionData {
     returnTo?: string;
@@ -37,6 +38,6 @@ app.get('*', (_req: Request, _res: Response, next: NextFunction) => {
 
 app.use(errorMiddleware);
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log('Listen to PORT ', PORT);
 });

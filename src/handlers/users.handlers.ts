@@ -67,7 +67,6 @@ export const signin_POST = async (
   try {
     const user = new Users();
     const result = await user.showByName(userCredentials.firstName, userCredentials.lastName);
-
     if (result && verifyPassword(userCredentials.password, result.password)) {
       res.cookie('token', createToken(result), { maxAge: 1000 * 60 * 60 * 24 });
       res.redirect(req.session.returnTo || '/');

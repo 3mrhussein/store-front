@@ -1,14 +1,17 @@
 // import { MythicalWeaponStore, Weapon } from '../mythical_weapons';
 
 import { PRODUCT, USER } from '../interfaces/interfaces';
+import Orders from '../models/orders.model';
+import Products from '../models/products.model';
 import Users from '../models/user.model';
+import { hash } from '../utils';
 
 export const userDummyData: USER[] = [
-  { firstName: 'user', lastName: 'user', password: 'password' },
-  { firstName: 'user2', lastName: 'user', password: 'password' },
-  { firstName: 'user3', lastName: 'user', password: 'password' },
-  { firstName: 'user4', lastName: 'user', password: 'password' },
-  { firstName: 'user5', lastName: 'user', password: 'password' },
+  { firstName: 'user', lastName: 'user', password: hash('password') },
+  { firstName: 'user2', lastName: 'user', password: hash('password') },
+  { firstName: 'user3', lastName: 'user', password: hash('password') },
+  { firstName: 'user4', lastName: 'user', password: hash('password') },
+  { firstName: 'user5', lastName: 'user', password: hash('password') },
 ];
 
 export const productDummyData: PRODUCT[] = [
@@ -38,7 +41,7 @@ export const ordersDummyData: OrderData[] = [
   { user: 2, status: 'complete' },
   { user: 2, status: 'complete' },
   { user: 2, status: 'complete' },
-  { user: 4, status: 'complete' },
+  { user: 3, status: 'complete' },
   { user: 3, status: 'complete' },
   { user: 3, status: 'complete' },
   { user: 3, status: 'active' },
@@ -84,10 +87,61 @@ export const orderProductDummyData = [
   { order_id: 8, product_id: 2, qty: 12 },
 ];
 
-export async function fillUsersData(usersArray: USER[]) {
+export const fillUsersData = async (usersArray: USER[]) => {
   const user = new Users();
   //let the last record to
   for (let i = 0; i < usersArray.length - 1; i++) {
     await user.create(usersArray[i]);
   }
+};
+
+export const fillProductsData = async (productData: PRODUCT[]) => {
+  const product = new Products();
+  productData.forEach(async (element) => {
+    await product.create(element);
+  });
+};
+
+export const fillOrdersData = async (orderData: OrderData[]) => {
+  const order = new Orders();
+  const user = new Users();
+  const users = await user.index();
+  orderData.forEach(async (element) => {
+    try {
+      await order.create({ user_id: users[element.user].id as string, status: element.status });
+    } catch (e) {
+      console.log(users[element.user]);
+      return;
+    }
+  });
+};
+
+export const fillOrdersProductsData = async (orderProductData: OrderProductData[]) => {
+  const order = new Orders();
+  const orders = await order.index();
+  const product = new Products();
+  const products = await product.index();
+  orderProductData.forEach(async (element) => {
+    await order.insertProduct({
+      order_id: orders[element.order_id].id as string,
+      product_id: products[element.product_id].id as string,
+      qty: element.qty,
+    });
+  });
+};
+
+export const fillDataBase = async () => {
+  console.log('Start Filling Database with dummy data');
+  await fillUsersData(userDummyData);
+  console.log('Done User Data');
+  await fillProductsData(productDummyData);
+  console.log('Done Product Data');
+  await fillOrdersData(ordersDummyData);
+  console.log('Done Orders Data');
+  await fillOrdersProductsData(orderProductDummyData);
+  console.log('Done Orders-Products Data');
+};
+
+if (process.env.ENV !== 'test') {
+  fillDataBase();
 }

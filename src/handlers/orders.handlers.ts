@@ -100,8 +100,8 @@ export const orders_create_POST = async (
   };
 
   try {
-    //first mark active user Order as completed
-    await order.setUserOrdersAsComplete(req.body.user_id);
+    //if the added order is active then mark all last user active order as completed
+    if (newOrder.status === 'active') await order.setUserOrdersAsComplete(req.body.user_id);
     const result = await order.create(newOrder);
     res.send(result);
   } catch (err) {
