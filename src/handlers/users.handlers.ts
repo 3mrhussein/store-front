@@ -68,7 +68,7 @@ export const signin_POST = async (
     const user = new Users();
     const result = await user.showByName(userCredentials.firstName, userCredentials.lastName);
     if (result && verifyPassword(userCredentials.password, result.password)) {
-      res.cookie('token', createToken(result), { maxAge: 1000 * 60 * 60 * 24 });
+      res.cookie('token', createToken(result), { maxAge: 1000 * 60 * 60 * 24, httpOnly: true });
       res.redirect(req.session.returnTo || '/');
     } else {
       next({ status: 400, message: 'Invalid user credentials' });
@@ -100,7 +100,7 @@ export const signup_POST = async (
   try {
     const user = new Users();
     const result = await user.create(newUser);
-    res.cookie('token', createToken(result), { maxAge: 1000 * 60 * 60 * 24 });
+    res.cookie('token', createToken(result), { maxAge: 1000 * 60 * 60 * 24, httpOnly: true });
     res.send(result);
   } catch (err) {
     next(err);
