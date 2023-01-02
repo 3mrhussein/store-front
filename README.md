@@ -14,10 +14,10 @@
  Build a JavaScript API based on a requirements given by the stakeholders. You will architect the database, tables, and columns to fulfill the requirements. Create a RESTful API to be accessible to the frontend developer. You will also have written test, secured user information with encryption, and provide tokens for integration into the frontend.
 
 </details>
-<details open ><summary> 
+
   
   ### Installation
-  </summary>
+ 
   
   You need to have [Node](https://nodejs.org/) & [Docker](https://www.docker.com/) installed in your machine, then you can follow one of these two ways to clone and install project dependencies.
   
@@ -36,18 +36,16 @@
       
   - `npm start` to fill database with dummy data & start server on http://localhost:4000
       
-  
-</details  >
 
 <details >
 <summary> 
  
- #### Endpoints
+ ### Endpoints
 
  </summary>
  
  
-### Main Route
+#### Main Route
 
 | HTTP Verbs | Endpoints | Action            |
 | ---------- | --------- | ----------------- |
@@ -57,7 +55,7 @@
 | POST       | /signin   | Authenticate user |
 | GET        | /signout  | Remove user token |
 
-### `users/` Route
+#### `users/` Route
 
 | HTTP Verbs | Endpoints     | Action                                               |
 | ---------- | ------------- | ---------------------------------------------------- |
@@ -66,7 +64,7 @@
 | GET        | /search       | Search User By ID [Page] [Require Authentication]    |
 | POST       | /:id          | Get data of user with `:id` [Require Authentication] |
 
-### `products/` Route
+#### `products/` Route
 
 | HTTP Verbs | Endpoints           | Action                                       |
 | ---------- | ------------------- | -------------------------------------------- |
@@ -79,7 +77,7 @@
 | GET        | /category           | Find product by category [Page]              |
 | GET        | /category/:category | Search Products by `:category`               |
 
-### `orders/` Route
+#### `orders/` Route
 
 | HTTP Verbs | Endpoints          | Action                                                        |
 | ---------- | ------------------ | ------------------------------------------------------------- |
@@ -95,9 +93,10 @@
 
 </details>
 
-#### Schema
+### Schema
+<img src="https://user-images.githubusercontent.com/34787413/210238932-bbdf2670-611a-48ef-87b8-2f4a01325e7f.png" width="700"/>
 
-#### Used Technologies
+### Used Technologies
 
 - [NodeJS](https://nodejs.org/) This is a cross-platform runtime environment built on Chrome's V8 JavaScript engine used in running JavaScript codes on the server. It allows for installation and managing of dependencies and communication with databases.
 
